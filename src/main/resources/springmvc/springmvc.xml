@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 配置扫描的包 -->
+	<context:component-scan base-package="com.witcher.demo.controller"/>
+	<!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
+	<mvc:annotation-driven />
+	<!-- 访问静态资源 -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 2. 配置Handler Mapping -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!-- 3. 配置Handler Adapter -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+	<!-- 4. 配置Handler -->
+	
+	<!-- 5. 配置View Resolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+         <property name="prefix" value="/WEB-INF/view/"/>
+         <property name="suffix" value=".jsp"/>
+         <!-- 6. 配置View -->
+         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+     </bean>
+     
+     <!-- 使用tomcat提供的默认Servlet处理静态资源 -->
+     <!-- <mvc:default-servlet-handler/> -->
+     
+     <!-- 使用SpringMVC提供的方法处理静态资源 -->
+     <mvc:resources location="/WEB-INF/imgs" mapping="/imgs/**"/>
+</beans>
